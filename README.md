@@ -45,7 +45,7 @@ During the project, I have used the following libraries:
     - /messages/delete : given a message ID deletes the line from the messages collection
     - /episodes/edit : given a season & episode number and a new number, updates the season & episode number from the episodes collection and the messages collection
     - /characters/edit : given a character name and a new name, updates the character's name from the characters collection and the messages collection
-    -  : given a message ID and new attributes (season, episode, character name and / or line), updates the message from the messages collection
+    - /messages/edit : given a message ID and new attributes (season, episode, character name and / or line), updates the message from the messages collection
 
 - I extracted the emotional value of messages per user through sentiment analysis and used visualization libraries to find trends in the data
 
