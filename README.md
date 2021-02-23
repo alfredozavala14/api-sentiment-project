@@ -32,10 +32,15 @@ During the project, I have used the following libraries:
     - messages: includes all lines said in the show, with the corresponding character name and season & esisode numbers
 - I wrote an API using flask that stores and serves data from the MongoDB through various endpoints. The endpoints I defined are the following:
     - `/characters` : returns the name of all characters in the database
+        - Takes: nothing
     - `/messages` : returns all the messages in the database with the name of the character who spoke the line
+        - Takes: nothing
     - `/episodes` : returns all seasons and episodes in the database
+        - Takes: nothing
     - `/seasons` : returns all seasons in the database
+        -Takes: nothing
     - `/messages/episode` : for a given season & episode, gives a list of all messages in the episode. Takes season and episode numbers
+        - Takes: "season" (int), "episode" (int)
     - `/messages/episode/character` : for a given season & episode and a character name gives a list of all messages in the episode from that character
     - `/episodes/new` : given a season & episode number, generates a new document in the episodes collection. Returns id of the new episode
     - `/characters/new` : given a character name, generates a new document in the characters collection. Returns id of the new character

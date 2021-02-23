@@ -35,13 +35,13 @@ def get_message_from_char(obj):
     Takes: season & episode numbers and character name
     Returns: all mesages in the episode from that character
     '''
-    if not check_params(obj,["season", "episode", "name"]):
-        return {"response":400,"message":"Bad Request: 'season', 'episode' and 'name' are obligatory parameters"}
-    q = {"season": int(obj["season"]), "episode": int(obj["episode"]), "name": obj["name"]}
+    if not check_params(obj,["season", "episode", "character"]):
+        return {"response":400,"message":"Bad Request: 'season', 'episode' and 'character' are obligatory parameters"}
+    q = {"season": int(obj["season"]), "episode": int(obj["episode"]), "character": obj["character"]}
     if not check_exists(q,"messages"):
-        return {"response":400,"message":"Bad Request: season & episode do not exist"}
+        return {"response":400,"message":"Bad Request: season, episode and character combination does not exist"}
     res = read_coll("messages",q)
-    return [m["name"] + ": " + m["line"] for m in res]
+    return [m["character"] + ": " + m["line"] for m in res]
 
 def insert_message(obj):
     '''
@@ -50,12 +50,12 @@ def insert_message(obj):
     Takes: season & episode number, character name and line
     Returns: "_id" of new message
     '''
-    if not check_params(obj,["season", "episode", "name", "line"]):
-        return {"response":400,"message":"Bad Request: 'season' 'episode', 'name' and 'line' are obligatory parameters"}
+    if not check_params(obj,["season", "episode", "character", "line"]):
+        return {"response":400,"message":"Bad Request: 'season' 'episode', 'character' and 'line' are obligatory parameters"}
     q1 = {"season": int(obj["season"]), "episode": int(obj["episode"])}
     if not check_exists(q1,"episodes"):
         return {"response":204,"message":"No content: there is no season & episode with those numbers in the espisodes collection"}
-    q2 = {"name": obj["name"]}
+    q2 = {"name": obj["character"]}
     if not check_exists(q2,"characters"):
         return {"response":204,"message":"No content: there is no character with that name in the characters collection"}
     res = write_coll("messages",obj)
