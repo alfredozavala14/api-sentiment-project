@@ -38,19 +38,29 @@ During the project, I have used the following libraries:
     - `/episodes` : returns all seasons and episodes in the database
         - Takes: nothing
     - `/seasons` : returns all seasons in the database
-        -Takes: nothing
+        - Takes: nothing
     - `/messages/episode` : for a given season & episode, gives a list of all messages in the episode. Takes season and episode numbers
         - Takes: "season" (int), "episode" (int)
     - `/messages/episode/character` : for a given season & episode and a character name gives a list of all messages in the episode from that character
+        - Takes: "season" (int), "episode" (int), "character" (str)
     - `/episodes/new` : given a season & episode number, generates a new document in the episodes collection. Returns id of the new episode
+        - Takes: "season" (int), "episode" (int)
     - `/characters/new` : given a character name, generates a new document in the characters collection. Returns id of the new character
+        - Takes: "name" (str)
     - `/messages/new` : given a season & episode number, a character name and a line, generates a new document in the messages collection. Returns id of the new message
+        - Takes: "season" (int), "episode" (int), "character" (str), "line" (str)
     - `/episodes/delete` : given a season & episode, deletes the season & episode from the episodes collection and its messages from the messages collection
+        - Takes: "season" (int), "episode" (int)
     - `/characters/delete` : given a character name, deletes the character from the characters collection and its messages from the messages collection
+        - Takes: "character" (str)
     - `/messages/delete` : given a message ID deletes the line from the messages collection
+        - Takes: "id" (ObjectId)
     - `/episodes/edit` : given a season & episode number and a new number, updates the season & episode number from the episodes collection and the messages collection
+        - Takes: "season" (int), "episode" (int) and at least one of "new_season" (int), "new_episode" (int)
     - `/characters/edit` : given a character name and a new name, updates the character's name from the characters collection and the messages collection
+        - Takes: "character" (str), "new_name" (str)
     - `/messages/edit` : given a message ID and new attributes (season, episode, character name and / or line), updates the message from the messages collection
+        - Takes: "id" (ObjectId) and, optionally, "season" (int), "episode" (int), "character" (str), "line" (str)
 
 - I extracted the emotional value of messages per user through sentiment analysis and used visualization libraries to find trends in the data
 

@@ -83,14 +83,14 @@ def update_message(obj):
     Takes: message ID
     Returns: nothing
     '''
-    if not check_params(obj, ["id"],["season", "episode", "name", "line"]):
-        return {"response":400,"message":"Bad Request: 'id' and at least one of ['season', 'episode', 'name' and 'line'] are obligatory parameters"}
+    if not check_params(obj, ["id"],["season", "episode", "character", "line"]):
+        return {"response":400,"message":"Bad Request: 'id' and at least one of ['season', 'episode', 'character' and 'line'] are obligatory parameters"}
     q = {"_id":ObjectId(obj["id"])}
     if not check_exists(q,"messages"):
         return {"response":400,"message":"Bad Request: message with given ID does not exist"}
     # check if character name exists in characters collection
-    if "name" in obj:
-        q_check = {"name": obj["name"]}
+    if "character" in obj:
+        q_check = {"name": obj["character"]}
         if not check_exists(q_check,"characters"):
             return {"response":400,"message":"Bad Request: character with given name does not exist in characters collection"}
     # check if given season and episode exist in episodes collection

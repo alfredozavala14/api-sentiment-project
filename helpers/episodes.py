@@ -65,8 +65,8 @@ def update_episode(obj):
     Takes: season number & episode number and new season number & episode number
     Returns: nothing
     '''
-    if not check_params(obj,["season", "episode", "new_season", "new_episode"]):
-        return {"response":400,"message":"Bad Request: 'season', 'episode', 'new_season' and 'new_episode' are obligatory parameters"}
+    if not check_params(obj,["season", "episode"], at_least_one=["new_season", "new_episode"]):
+        return {"response":400,"message":"Bad Request: 'season', 'episode' and at least one of 'new_season' and 'new_episode' are obligatory parameters"}
     q = {"season": int(obj["season"]), "episode": int(obj["episode"])}
     if not check_exists(q,"episodes"):
         return {"response":400,"message":"Bad Request: season and episode with given number do not exist"}

@@ -35,13 +35,14 @@ def delete_character(obj):
     Takes: character name
     Returns: nothing
     '''
-    if not check_params(obj,["name"]):
-        return {"response":400,"message":"Bad Request: 'name' is an obligatory parameter"}
-    q = {"name": obj["name"]}
+    if not check_params(obj,["character"]):
+        return {"response":400,"message":"Bad Request: 'character' is an obligatory parameter"}
+    q = {"name": obj["character"]}
     if not check_exists(q,"characters"):
         return {"response":400,"message":"Bad Request: character with given name does not exist"}
     delete_coll("characters",q) # delete character from characters collection
-    delete_coll("messages",q) # delete character's messages from messages collection
+    q2 = {"character": obj["character"]} 
+    delete_coll("messages",q2) # delete character's messages from messages collection
     return {"response":200,"message":"Character successfully deleted"}
 
 def update_character(obj):
@@ -52,14 +53,15 @@ def update_character(obj):
     Takes: character name
     Returns: nothing
     '''
-    if not check_params(obj,["name", "new_name"]):
-        return {"response":400,"message":"Bad Request: 'name' ane 'new_name' are obligatory parameters"}
-    q = {"name": obj["name"]}
+    if not check_params(obj,["character", "new_name"]):
+        return {"response":400,"message":"Bad Request: 'character' ane 'new_name' are obligatory parameters"}
+    q = {"name": obj["character"]}
     if not check_exists(q,"characters"):
         return {"response":400,"message":"Bad Request: character with given name does not exist"}
-    obj.pop("name")
+    obj.pop("character")
     obj["name"] = obj["new_name"]
     obj.pop("new_name")
     update_coll("characters",q,obj) # update character in characters collection
-    update_coll("messages",q,obj) # update character's messages in messages collection
+    q2 = {"character": obj["name"]} 
+    update_coll("messages",q2,obj) # update character's messages in messages collection
     return {"response":200,"message":"Character successfully updated"}
